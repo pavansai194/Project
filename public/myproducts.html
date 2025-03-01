@@ -1,0 +1,67 @@
+<%@ page import="java.sql.*" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>HONEY PALACE</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Product Data</h2>
+    <%
+        try {
+            // Load the JDBC driver
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+
+            // Establish the database connection
+            Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "mourya");
+
+            // Create a Statement
+            Statement statement = connection.createStatement();
+
+            // Execute a query to retrieve data
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM products1");
+
+            // Display the retrieved data
+            out.println("<table>");
+            out.println("<tr><th>Product ID</th><th>Name</th><th>Price</th><th>Quantity</th><th>Image</th></tr>");
+            while(resultSet.next()) {
+                out.println("<tr>");
+                out.println("<td>" + resultSet.getString("PRODUCTID") + "</td>");
+                out.println("<td>" + resultSet.getString("NAME") + "</td>");
+                out.println("<td>" + resultSet.getString("PRICE") + "</td>");
+                out.println("<td>" + resultSet.getString("QUANTITY") + "</td>");
+                out.println("<td><img src='" + resultSet.getString("IMAGE") + "' alt='Product Image' width='100'></td>");
+                out.println("</tr>");
+            }
+            out.println("</table>");
+
+            // Close resources
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            out.println("Exception: " + e.getMessage());
+            e.printStackTrace();
+        }
+    %>
+</body>
+</html>

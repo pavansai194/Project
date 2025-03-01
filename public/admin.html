@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        /* Buttons */
+        .button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .logout-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .logout-btn:hover {
+            background-color: #d11a2a;
+        }
+
+        /* Table Style */
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            background-color: #fafafa;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .item:hover {
+            transform: scale(1.02);
+            background-color: #f1f1f1;
+        }
+
+        /* Table Layout for Users and Orders */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        table th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        /* Section Titles */
+        h2 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            color: #007BFF;
+        }
+
+        /* Container for content */
+        #users-container, #orders-container {
+            padding: 20px;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #888;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    
+    <div style="text-align: center;">
+        <button class="button" onclick="fetchUsers()">View Users</button>
+        <button class="button" onclick="fetchOrders()">View Orders</button>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <!-- Users Section -->
+    <div class="section" id="users-section">
+        <h2>Users</h2>
+        <div id="users-container" class="empty-state">No users found.</div>
+    </div>
+
+    <!-- Orders Section -->
+    <div class="section" id="orders-section">
+        <h2>Orders</h2>
+        <div id="orders-container" class="empty-state">No orders found.</div>
+    </div>
+
+    <script>
+        function fetchUsers() {
+            fetch('/api/admin/users')
+                .then(response => response.json())
+                .then(data => displayUsers(data))
+                .catch(error => console.error('Error fetching users:', error));
+        }
+
+        function fetchOrders() {
+            fetch('/api/admin/orders')
+                .then(response => response.json())
+                .then(data => displayOrders(data))
+                .catch(error => console.error('Error fetching orders:', error));
+        }
+
+        function displayUsers(users) {
+            const container = document.getElementById('users-container');
+            container.innerHTML = ''; // Clear any previous content
+            if (users.length === 0) {
+                container.innerHTML = '<div class="empty-state">No users found.</div>';
+                return;
+            }
+            const table = document.createElement('table');
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Gender</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${users.map(user => `
+                        <tr>
+                            <td>${user.fullname}</td>
+                            <td>${user.email}</td>
+                            <td>${user.number}</td>
+                            <td>${user.gender}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            `;
+            container.appendChild(table);
+        }
+
+        function displayOrders(orders) {
+            const container = document.getElementById('orders-container');
+            container.innerHTML = ''; // Clear any previous content
+            if (orders.length === 0) {
+                container.innerHTML = '<div class="empty-state">No orders found.</div>';
+                return;
+            }
+            const table = document.createElement('table');
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Place</th>
+                        <th>Email</th>
+                        <th>Total Price</th>
+                        <th>Products</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${orders.map(order => `
+                        <tr>
+                            <td>${order.name}</td>
+                            <td>${order.place}</td>
+                            <td>${order.email}</td>
+                            <td>₹${order.totalPrice}</td>
+                            <td>
+                                <ul>
+                                    ${order.products.map(product => `
+                                        <li>${product.name} - Qty: ${product.quantity}</li>
+                                    `).join('')}
+                                </ul>
+                            </td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            `;
+            container.appendChild(table);
+        }
+
+        function logout() {
+            window.location.href = '/login.html'; // Adjust this path to the home or login page
+        }
+    </script>
+</body>
+</html>

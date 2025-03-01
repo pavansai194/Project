@@ -1,0 +1,65 @@
+<%@ page import="java.sql.*" %>
+<%@ page import="javax.naming.*" %>
+<%@ page import="javax.sql.*" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>HONEY PALACE</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Registration Data</h2>
+    <%
+        // Establish the database connection
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "mourya");
+            Statement statement = connection.createStatement();
+
+            // Execute a query to retrieve data
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM registration");
+
+            // Display the retrieved data
+            out.println("<table>");
+            out.println("<tr><th>Full Name</th><th>Email</th><th>Phone Number</th><th>Password</th><th>Gender</th></tr>");
+            while(resultSet.next()) {
+                out.println("<tr>");
+                out.println("<td>" + resultSet.getString("FULLNAME") + "</td>");
+                out.println("<td>" + resultSet.getString("EMAIL") + "</td>");
+                out.println("<td>" + resultSet.getString("phone_number") + "</td>");
+                out.println("<td>" + resultSet.getString("password") + "</td>");
+                out.println("<td>" + resultSet.getString("gender") + "</td>");
+                out.println("</tr>");
+            }
+            out.println("</table>");
+
+            // Close resources
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            out.println("Exception: " + e.getMessage());
+            e.printStackTrace();
+        }
+    %>
+</body>
+</html>

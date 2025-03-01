@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HONEY PALACE</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /* Additional CSS for dropdown */
+        .profile-menu {
+            position: relative;
+        }
+    
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: rgb(0, 0, 0);
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding: 10px;
+            z-index: 1;
+        }
+    
+        .dropdown-content a {
+            text-decoration: none;
+            display: block;
+            padding: 8px;
+            color: black;
+        }
+    
+        .profile-menu:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+    
+</head>
+<body>
+    <section class="sub1-header">
+        <nav>
+            <a href="index.html"><img src="images/favicon.ico" alt="Logo"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="shop.html">SHOP</a></li>
+                    <li><a href="review.html">REVIEWS</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                    <li class="profile-menu">
+                        <a href="#"><i class="fas fa-user"></i></a>
+                        <div class="dropdown-content">
+                            <a>Welcome, <%= session.getAttribute("fullname") %></a>
+                            <a>Email: <%= session.getAttribute("email") %></a>
+                            <a href="login.html">LOG OUT</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1>Our Works & Their Reviews</h1>
+    </section>
+
+    <section class="review-content">
+        <div class="row">
+            <div class="review-left">
+                <img src="images/review1.jpg" alt="Review Image">
+                <h2>Customers love our honey products very much</h2>
+                <p>Absolutely love the honey! The taste is divine and knowing it's 100% pure makes it even better.<br>The honey has become my go-to for all things honey-related. Its rich flavor truly produces the most delicious honey I've ever tasted. Each jar is like a little pot of liquid gold.</p>
+            </div>
+            <div class="review-right">
+                <img src="images/review2.jpg" alt="Review Image">
+                <h2>Wild Animals Like Bears also love our Honey</h2>
+                <p>Prefer Honeycomb: Bears are known to prefer honeycomb rather than just the honey itself.<br>They consume the entire comb, including the larvae and pupae, for the protein content.<br>High-Calorie Source: Honey provides bears with a dense source of calories, crucial for their survival.</p>
+            </div>
+            <div class="comment-box">
+                <h3>Leave a comment</h3>
+                <form action="reviews.jsp" class="comment-form" method="post">
+                    <input type="text" placeholder="Enter name" name="fullname" required>
+                    <input type="email" placeholder="Enter email" name="email" required>
+                    <!-- Dropdown menu -->
+                    <div class="dropdown-menu">
+                        <select name="honey-type" required>
+                            <option value="" disabled selected>Select the honey</option>
+                            <option value="buckwheat">Buckwheat Honey</option>
+                            <option value="clover">Clover Honey</option>
+                            <option value="lavender">Lavender Honey</option>
+                            <option value="jasmine">Jasmine Honey</option>
+                            <option value="sunflower">Sunflower Honey</option>
+                            <option value="apple">Apple Honey</option>
+                            <option value="rustic">Rustic Honey</option>
+                            <option value="orange">Orange Honey</option>
+                            <option value="lemon">Lemon Honey</option>
+                        </select>
+                    </div>
+                    <!-- End of Dropdown menu -->
+                    <textarea rows="5" placeholder="Your comment" name="comment" required></textarea>
+                    <button type="submit" class="hero-btn red-btn">POST COMMENT</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="footer">
+        <h4>About Us</h4>
+        <p>At SAI's HONEY <i class="fa fa-heart-o"></i> we offer a selection of premium honey varieties with premium packaging.</p>
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+        <p>Made with <i class="fa fa-heart-o"></i> by Mourya Sai </p>
+    </section>
+    
+    <!-- JavaScript to show/hide navigation menu -->
+    <script>
+        function showMenu() {
+            var navLinks = document.getElementById("navLinks");
+            navLinks.style.right = "0";
+        }
+
+        function hideMenu() {
+            var navLinks = document.getElementById("navLinks");
+            navLinks.style.right = "-200px";
+        }
+    </script>
+</body>
+</html>

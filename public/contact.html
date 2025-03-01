@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HONEY PALACE</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https:/stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+    /* Additional CSS for dropdown */
+    .profile-menu {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: rgb(0, 0, 0);
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      padding: 10px;
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      text-decoration: none;
+      display: block;
+      padding: 8px;
+      color: black;
+    }
+
+    .profile-menu:hover .dropdown-content {
+      display: block;
+    }
+  </style>
+
+<body>
+    <section class="sub3-header">
+        <nav>
+            <a href="index.html"><img src="images/favicon.ico"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="shop.html">SHOP</a></li>
+                         <li><a href="bookings.html">BOOKINGS</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                    <li class="profile-menu">
+                        <!-- Font Awesome User Icon -->
+                        <a href="#"><i class="fas fa-user"></i></a>
+                        <div class="dropdown-content">
+                          <a>Welcome, <%= session.getAttribute("fullname") %></a>
+                          <a>Email: <%= session.getAttribute("email") %></a>
+                          <a href="login.html">LOG OUT</a>
+                        </div>
+                      </li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1>Contact Us</h1>
+     </section> 
+   <!---CONTACT US-->
+   <section class="location">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7640.853697154562!2d80.64139940000003!3d16.755426000000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1712339837661!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+   </section>
+   <section class="contact-us">
+    <div class="row">
+        <div class="contact-col">
+            <div>
+                <i class="fa fa-home"></i>  
+                <span>
+                    <h5>Narasimha boys hostel,mylavaram road</h5>
+                    <p>vijayawad, Andhra Pradesh,INDIA</p>
+                </span>
+            </div>
+            <div>
+                <i class="fa fa-phone"></i>  
+                <span>
+                    <h5>+91 8106740226</h5>
+                    <p>Monday to Saturday, 10AM - 6PM</p>
+                </span>
+            </div>
+            <div>
+                <i class="fa fa-envelope-o"></i>  
+                <span>
+                    <h5>saihoney@gmail.com</h5>
+                    <p>Email us your query</p>
+                </span>
+            </div>
+        </div>
+        <div class="contact-col">
+            <form action="mycontacts.html">
+                <input type="text" placeholder="Enter your name" name="fullname" required>
+                <input type="email" placeholder="Enter email address" name="email" required>
+                <input type="text" placeholder="Enter your subject" name="subject" required>
+                <textarea rows="8" placeholder="Enter your description" name="description" required></textarea>
+                <button type="submit" class="hero-btn red-btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+   </section>
+    <!--Footer-->
+<section class="footer">
+    <h4>About Us</h4>
+    <p>At HONEY PALACE <i class="fa fa-heart-o"></i> we offer a selection of premium honey varieties with premium packing</p>
+    <div class="icons">
+        <i class="fa fa-facebook"></i>
+        <i class="fa fa-twitter"></i>
+        <i class="fa fa-instagram"></i>
+        <i class="fa fa-linkedin"></i>
+    </div>
+    <p>Made with <i class="fa fa-heart-o"></i> by Mourya Sai </p>
+</section>

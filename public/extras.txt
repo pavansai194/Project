@@ -1,0 +1,243 @@
+css
+/*========== Variables Dark theme ==========*/
+body.dark-theme{
+  --title-color: #F1F3F2;
+  --text-color: #C7D1CC;
+  --body-color: #1D2521;
+  --container-color: #27302C;
+}
+
+/*========== Button Dark/Light ==========*/
+.change-theme{
+  position: absolute;
+  right: 1rem;
+  top: 1.8rem;
+  color: var(--text-color);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+box icons 
+ <!--========== BOX ICONS ==========-->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+<div>
+      <h2>--Cart of Honey Collector--</h2><br>
+    </div>
+
+    <!-- cart -->
+<div class="cart-container">
+  <div class="cart-icon">
+    <i class="bx bx-cart"></i>
+    <span class="cart-count"></span>
+  </div>
+
+  <div class="cart-dropdown">
+    <ul class="cart-items"></ul>
+    <div class="cart-total">
+      <span>Total:</span>
+      <span class="total-amount"></span>
+    </div>
+    <a href="#" class="checkout-btn">Checkout</a>
+  </div>
+</div>
+
+/*---shop---*/
+.shop{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+}
+h1{
+    font-size: 36px;
+    font-weight: 600;
+}
+p{
+    color: #777;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    padding: 10px;
+}
+.row{
+    margin: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+.shop-col{
+    flex-basis: 31%;
+    background: #dab74d;
+    border-radius: 10px;
+    margin-bottom: 20px 12px;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+h3{
+    text-align: center;
+    font-weight: 600;
+    margin: 10px;
+}
+.shop-col:hover{
+    box-shadow: 0 0 20px 0px rgba(5, 199, 8, 0.2);
+}
+@media(max-width: 700px){
+    .row{
+        flex-direction: column;
+    }
+}
+/*--items--*/
+.items{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 50px;
+}
+.items-col{
+    flex-basis: 32%;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+.items-col img{
+    width: 100%;
+    display: block;
+}
+.layer{
+    background: transparent;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.5s;
+}
+.layer:hover{
+    background: rgba(226,0,0,0.7);
+}
+.layer h3{
+    width: 100%;
+    font-weight: 500;
+    color: #f7f3f3;
+    font-size: 26px;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+    position: absolute;
+    opacity: 0;
+    transition: 0.5s;
+}
+.layer h3:hover{
+    bottom: 49%;
+    opacity: 1;
+}
+.nav-links ul li a i.fa-shopping-cart {
+    color: #000; /* Change this to the color you want for the cart icon */
+    font-size: 24px; /* Change this to adjust the size of the cart icon */
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HONEY</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https:/stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <section class="sub2-header">
+        <nav>
+            <a href="index.html"><img src="images/favicon.ico"></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="shop.html">SHOP</a></li>
+                    <li><a href="review.html">REVIEWS</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <h1>Our Products</h1>
+     </section> 
+   <!----------------SHOP PAGE--------------->
+   <section class="shop">
+    <h1>collection we offer you</h1>
+    <p>At Honey ❤️ we offer a selection of premium honey varieties including Wildflower, Clover, Manuka, Orange Blossom, Buckwheat, Lavender, and Eucalyptus, each delivering its own distinct flavor and character.</p>
+   <div class="row">
+        <div class="shop-col">
+            <h3>Wildflower Honey</h3>
+            <p>At Honey ❤️ we offer a selection of premium honey varieties including Wildflower, Clover, Manuka, Orange Blossom, Buckwheat, Lavender, and Eucalyptus, each delivering its own distinct flavor and character.</p>
+        </div>
+        <div class="shop-col">
+            <h3>Clover Honey</h3>
+            <p>At Honey ❤️ we offer a selection of premium honey varieties including Wildflower, Clover, Manuka, Orange Blossom, Buckwheat, Lavender, and Eucalyptus, each delivering its own distinct flavor and character.</p>
+        </div>
+        <div class="shop-col">
+            <h3>Manuka Honey</h3>
+            <p>At Honey ❤️ we offer a selection of premium honey varieties including Wildflower, Clover, Manuka, Orange Blossom, Buckwheat, Lavender, and Eucalyptus, each delivering its own distinct flavor and character.</p>
+        </div>
+    </div>
+  </section>
+  <!---------items/collection--------------->
+  <section class="items">
+    <h1>Various Honey Products</h1>
+    <p>At Honey ❤️ we offer a selection of premium honey varieties including Wildflower</p>
+    <div class="row">
+        <div class="items-col">
+            <img src="images/buckwheathoney.jpg">
+            <div class="layer">
+                <h3>BUCKWHEAT HONEY</h3>
+            </div>
+        </div>
+        <div class="items-col">
+            <img src="images/clover.jpg">
+            <div class="layer">
+                <h3>CLOVER HONEY</h3>
+            </div>
+        </div>
+        <div class="items-col">
+            <img src="images/lavender.jpg">
+            <div class="layer">
+                <h3>LAVENDER HONEY</h3>
+            </div>
+        </div>
+    </div>
+  </section>
+    <!---------Footer--------->
+<section class="footer">
+    <h4>About Us</h4>
+    <p>At Honey ❤️ we offer a selection of premium honey varieties with premium packing</p>
+    <div class="icons">
+        <i class="fa fa-facebook"></i>
+        <i class="fa fa-twitter"></i>
+        <i class="fa fa-instagram"></i>
+        <i class="fa fa-linkedin"></i>
+    </div>
+    <p>Made with <i class="fa fa-heart-o"></i> by Mourya Sai </p>
+</section>
+
+<----------------Button------------------------>
+.hero-btn{
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    border: ipx solid #fff;
+    padding: 12px 34px;
+    font-size: 13px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+}
+.hero-btn:hover{
+    border: 1px solid #f44336;
+    background: #f44336;
+    transition: 1.5s;
+}
+<---------------------Button ---------------------->
+<a href="about.html" class="hero-btn">Visit us to know more</a>

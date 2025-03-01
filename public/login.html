@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HONEY PALACE - Login</title>
+  <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins&display=swap'>
+  <link rel="stylesheet" href="1.css">
+</head>
+<body>
+  <form id="loginForm">
+    <div class="wrapper">
+      <div class="login_box">
+        <div class="login-header">
+          <span>Login</span>
+        </div>
+
+        <div class="input_box">
+          <input type="email" id="email" name="email" class="input-field" required>
+          <label for="email" class="label">Email</label>
+          <i class="bx bx-user icon"></i>
+        </div>
+
+        <div class="input_box">
+          <input type="password" id="pass" name="password" class="input-field" required>
+          <label for="pass" class="label">Password</label>
+          <i class="bx bx-lock-alt icon"></i>
+        </div>
+
+        <div class="remember-forgot">
+          <div class="remember-me">
+            <input type="checkbox" id="remember">
+            <label for="remember">Remember me</label>
+          </div>
+
+          <div class="forgot">
+            <a href="#">Forgot password?</a>
+          </div>
+        </div>
+
+        <div class="input_box">
+          <input type="submit" class="input-submit" value="Login">
+        </div>
+
+        <div class="register">
+          <span>Don't have an account? <a href="registration.html">Register</a></span>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+  const loginForm = document.getElementById("loginForm");
+
+  loginForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("pass").value.trim();
+
+    if (email === "" || password === "") {
+      alert("Please fill in both fields.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        if (data.redirect) {
+          // Redirect for admin
+          window.location.href = data.redirect;
+        } else {
+          // Redirect for user
+          window.location.href = "/index.html";
+        }
+      } else {
+        alert(data.error || "Login failed.");
+      }
+    } catch (error) {
+      alert("An error occurred during login. Please try again.");
+    }
+  });
+});
+
+  </script>
+  
+</body>
+</html>

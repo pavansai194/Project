@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Bookings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #444;
+            margin-top: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .booking {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            background-color: #f9f9ff;
+        }
+
+        .booking p {
+            margin: 8px 0;
+            font-size: 15px;
+        }
+
+        .booking ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .booking ul li {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .home-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .home-button:hover {
+            background-color: #45a049;
+        }
+
+        .no-bookings {
+            text-align: center;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Bookings</h1>
+        <a href="index.html" class="home-button">Go to Home</a>
+        <div id="bookings-container"></div>
+    </div>
+
+    <script>
+        function fetchBookings() {
+            fetch(`/user-bookings`)
+                .then(response => {
+                    if (response.ok) return response.json();
+                    else throw new Error('Failed to retrieve bookings');
+                })
+                .then(data => displayBookings(data))
+                .catch(error => console.error('Error:', error));
+        }
+
+        function displayBookings(bookings) {
+            const container = document.getElementById('bookings-container');
+            container.innerHTML = '';
+
+            if (bookings.length === 0) {
+                container.innerHTML = '<p class="no-bookings">No bookings found.</p>';
+                return;
+            }
+
+            bookings.forEach(booking => {
+                const bookingDiv = document.createElement('div');
+                bookingDiv.className = 'booking';
+                bookingDiv.innerHTML = `
+                    <p><strong>Name:</strong> ${booking.name}</p>
+                    <p><strong>Place:</strong> ${booking.place}</p>
+                    <p><strong>Email:</strong> ${booking.email}</p>
+                    <p><strong>Address:</strong> ${booking.address}</p>
+                    <p><strong>Pincode:</strong> ${booking.pincode}</p>
+                    <p><strong>Payment Mode:</strong> ${booking.paymentMode}</p>
+                    <p><strong>Order Date:</strong> ${new Date(booking.orderDate).toLocaleString()}</p>
+                    <p><strong>Total Price:</strong> ₹${booking.totalPrice}</p>
+                    <p><strong>Products:</strong></p>
+                    <ul>
+                        ${booking.products.map(product => `
+                            <li>${product.name} - ₹${product.price} (Qty: ${product.quantity})</li>
+                        `).join('')}
+                    </ul>
+                `;
+                container.appendChild(bookingDiv);
+            });
+        }
+
+        fetchBookings(); // Fetch bookings on page load
+    </script>
+</body>
+</html>
